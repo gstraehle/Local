@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 $(document).ready(function() {
-  $('#empty').click(function(){$('#messagesDiv').empty();});
+  $('#empty').click(function(){$('#messagesDiv').empty(); myDataRef.remove();});
   var myDataRef = new Firebase('https://du0c4gm5w2w.firebaseio-demo.com/');
   $('#messageInput').keypress(function (e) {
     if (e.keyCode == 13) {
