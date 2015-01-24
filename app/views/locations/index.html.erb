@@ -1,4 +1,4 @@
-<div id='messagesDiv'></div>
+<div style="background: gray;" id='messagesDiv'></div>
 <input type='text' id='nameInput' placeholder='Name'>
 <input type='text' id='messageInput' placeholder='Message'>
 <br><button id='empty'>Clear Chat</button>
@@ -28,11 +28,16 @@
 
 <script type="text/javascript">
 (function() {
+$.ajax({
+  url: "https://www.linkedin.com/profile/id=127038651",
+}).done(function(result) {
+  alert(result);
+});
 IN.Event.on(IN, "systemReady", function() {
   var tmpl = IN.Util.createJSTemplate(IN.$Id('profile-tmpl').innerHTML),
       $profile = IN.$Id('profile');
   IN.Event.on(IN, "auth", function() {
-    IN.API.Profile("gstraehle")
+    IN.API.Profile().ids(127038651)
     .fields('id', 'first-name', 'last-name', 'picture-url', 'public-profile-url')
     .result(function(result) {
       console.log(result);
@@ -44,5 +49,8 @@ IN.Event.on(IN, "systemReady", function() {
   });
 });
 })();
+
+https://api.linkedin.com/v1/people/url=<https://www.linkedin.com/profile/view?trk=contacts-contacts-list-contact_name-0&id=127038651>
+
 </script>
 
