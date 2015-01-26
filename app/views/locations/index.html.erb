@@ -3,54 +3,54 @@
 <input type='text' id='messageInput' placeholder='Message'>
 <br><button id='empty'>Clear Chat</button>
 
+  <div hidden>
 
+  <!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
+  <script type="text/javascript" src="https://platform.linkedin.com/in.js">
+    api_key: 781me1750sqyn9onlyone9!!!!
+    authorize: true
+  </script>
 
-<!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
-<script type="text/javascript" src="https://platform.linkedin.com/in.js">
-  api_key: 781me1750sqyn9
-  authorize: true
-</script>
+  <script type="IN/Login"></script>
 
-<script type="IN/Login"></script>
+  <div id="profile"></div>
 
-<div id="profile"></div>
+  <script type="text/html" id="profile-tmpl">
+  <form action="/register.html">
+  <p>Your Name: <input type="text" name="name" value="<?js= firstName ?> <?js= lastName ?>" /></p>
+  <p>Picture: <input type="text" name="pic" value="<?js= pictureUrl ?>" /></p>
+  <div style="height: 80px; width: 80px; background: black; background-image: url('<?js= pictureUrl ?>');"></div>
 
-<script type="text/html" id="profile-tmpl">
-<form action="/register.html">
-<p>Your Name: <input type="text" name="name" value="<?js= firstName ?> <?js= lastName ?>" /></p>
-<p>Picture: <input type="text" name="pic" value="<?js= pictureUrl ?>" /></p>
-<div style="height: 80px; width: 80px; background: black; background-image: url('<?js= pictureUrl ?>');"></div>
+  <input type="hidden" name="linkedin-id" value="<?js= id ?>" />
+  <input type="submit" name="submit" value="Sign Up"/>
+  </form>
+  </script>
 
-<input type="hidden" name="linkedin-id" value="<?js= id ?>" />
-<input type="submit" name="submit" value="Sign Up"/>
-</form>
-</script>
-
-<script type="text/javascript">
-(function() {
-$.ajax({
-  url: "https://www.linkedin.com/profile/id=127038651",
-}).done(function(result) {
-  alert(result);
-});
-IN.Event.on(IN, "systemReady", function() {
-  var tmpl = IN.Util.createJSTemplate(IN.$Id('profile-tmpl').innerHTML),
-      $profile = IN.$Id('profile');
-  IN.Event.on(IN, "auth", function() {
-    IN.API.Profile().ids(127038651)
-    .fields('id', 'first-name', 'last-name', 'picture-url', 'public-profile-url')
-    .result(function(result) {
-      console.log(result);
-      $profile.innerHTML = tmpl(result.values[0]);
-    }, this)
-    .error(function(result) {
-      $profile.innerHTML = result.message;
-    }, this);
+  <script type="text/javascript">
+  (function() {
+  $.ajax({
+    url: "https://www.linkedin.com/profile/id=127038651",
+  }).done(function(result) {
+    alert(result);
   });
-});
-})();
+  IN.Event.on(IN, "systemReady", function() {
+    var tmpl = IN.Util.createJSTemplate(IN.$Id('profile-tmpl').innerHTML),
+        $profile = IN.$Id('profile');
+    IN.Event.on(IN, "auth", function() {
+      IN.API.Profile().ids(127038651)
+      .fields('id', 'first-name', 'last-name', 'picture-url', 'public-profile-url')
+      .result(function(result) {
+        console.log(result);
+        $profile.innerHTML = tmpl(result.values[0]);
+      }, this)
+      .error(function(result) {
+        $profile.innerHTML = result.message;
+      }, this);
+    });
+  });
+  })();
 
-https://api.linkedin.com/v1/people/url=<https://www.linkedin.com/profile/view?trk=contacts-contacts-list-contact_name-0&id=127038651>
-
-</script>
-
+  https://api.linkedin.com/v1/people/url=<https://www.linkedin.com/profile/view?trk=contacts-contacts-list-contact_name-0&id=127038651>
+//missing script tag closure?
+  </script>
+</div>
